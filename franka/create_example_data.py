@@ -17,7 +17,7 @@ def create_fake_episode(idx, path):
         episode.append({
             'image': cv2.resize(images[step].transpose((1,2,0)), (256, 256), interpolation = cv2.INTER_LINEAR).astype(np.uint8),
             'state': states[step],
-            'action': actions[step],
+            'action': actions[step].astype(np.float32),
             'language_instruction': TASK_DESCRIPTION,
         })
     np.save(path, episode)
