@@ -8,6 +8,8 @@ N_VAL_EPISODES = 3
 DATA_PATH = "/data/pulkitag/misc/marcel/simassets/PolicyLearning/demos/cupntrashrealimgteleop/"
 TASK_DESCRIPTION = 'pick bowl and place in sink'
 def create_fake_episode(idx, path):
+    import IPython
+    IPython.embed()
     episode = []
     actions = np.load(DATA_PATH+f"actions_0_{idx}.npy")
     images = np.load(DATA_PATH+f"images_0_{idx}.npy")
