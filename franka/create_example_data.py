@@ -15,7 +15,7 @@ def create_fake_episode(idx, path):
     states = np.load(DATA_PATH+f"states_0_{idx}.npy")
     for step in range(len(actions)):
         episode.append({
-            'image': cv2.resize(images[step].transpose((1,2,0)), (256, 256), interpolation = cv2.INTER_LINEAR),
+            'image': cv2.resize(images[step].transpose((1,2,0)), (256, 256), interpolation = cv2.INTER_LINEAR).astype(np.uint8),
             'state': states[step],
             'action': actions[step],
             'language_instruction': TASK_DESCRIPTION,
