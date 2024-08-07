@@ -14,10 +14,12 @@ def create_fake_episode(idx, path):
     images = np.load(DATA_PATH+f"images_0_{idx}.npz")["arr_0"][0,:,0]
     states = np.load(DATA_PATH+f"states_0_{idx}.npy")[0]
     for step in range(len(actions)):
+        one_hot_action = np.zeros(14)
+        one_hot_action[actions[step]] = 1
         episode.append({
             'image': cv2.resize(images[step].transpose((1,2,0)), (256, 256), interpolation = cv2.INTER_LINEAR).astype(np.uint8),
             'state': states[step],
-            'action': actions[step].astype(np.float32),
+            'action': one_hot_action.astype(np.float32),
             'language_instruction': TASK_DESCRIPTION,
         })
     np.save(path, episode)
