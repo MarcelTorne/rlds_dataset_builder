@@ -13,6 +13,8 @@ def create_fake_episode(idx, path):
     actions = np.load(DATA_PATH+f"actions_0_{idx}.npy")
     images = np.load(DATA_PATH+f"images_0_{idx}.npz")["arr_0"][0,:,0]
     states = np.load(DATA_PATH+f"states_0_{idx}.npy")
+    import IPython
+    IPython.embed()
     for step in range(len(actions)):
         episode.append({
             'image': cv2.resize(images[step].transpose((1,2,0)), (256, 256), interpolation = cv2.INTER_LINEAR).astype(np.uint8),
