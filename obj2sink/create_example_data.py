@@ -6,7 +6,7 @@ import cv2
 N_TRAIN_EPISODES = 12
 N_VAL_EPISODES = 3
 
-DATA_PATH = "ugrad_commons-obj2sink-rgb/"
+DATA_PATH = "/home/marcel/rlds_dataset_builder/ugrad_commons-obj2sink-rgb/"
 TASK_DESCRIPTION = 'pick bowl and place in sink'
 def create_fake_episode(idx, path):
     episode = []
