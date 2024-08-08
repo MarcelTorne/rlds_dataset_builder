@@ -3,8 +3,8 @@ import tqdm
 import os
 import cv2
 
-N_TRAIN_EPISODES = 12
-N_VAL_EPISODES = 3
+N_TRAIN_EPISODES = 9
+N_VAL_EPISODES = 1
 
 DATA_PATH = "/home/marcel/rlds_dataset_builder/ugrad_commons-obj2sink-rgb/"
 TASK_DESCRIPTION = 'pick bowl and place in sink'
