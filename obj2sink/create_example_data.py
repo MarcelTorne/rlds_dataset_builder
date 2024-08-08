@@ -14,7 +14,7 @@ def create_fake_episode(idx, path):
     import IPython
     IPython.embed()
     actions = traj["actions"][0]
-    images =traj["images"][0,:,0]
+    images =traj["images"][0,:,1]
     states = traj["states"][0]
     # actions = np.load(DATA_PATH+f"actions_0_{idx}.npy")[0]
     # images = np.load(DATA_PATH+f"images_0_{idx}.npz")["arr_0"][0,:,0]
