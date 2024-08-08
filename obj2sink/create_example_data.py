@@ -11,8 +11,6 @@ TASK_DESCRIPTION = 'pick bowl and place in sink'
 def create_fake_episode(idx, path):
     episode = []
     traj = np.load(DATA_PATH+f"traj_0_{idx}.npz")
-    import IPython
-    IPython.embed()
     actions = traj["actions"][0]
     images =traj["images"][0,:,1]
     states = traj["states"][0]
