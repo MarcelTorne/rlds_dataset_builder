@@ -1,0 +1,43 @@
+import numpy as np
+import tqdm
+import os
+import cv2
+
+N_TRAIN_EPISODES = 9
+N_VAL_EPISODES = 1
+
+DATA_PATH = "/home/marcel/rlds_dataset_builder/ugrad_commons-obj2sink-rgbv3/"
+TASK_DESCRIPTION = 'pick bowl and place in sink'
+def create_fake_episode(idx, path):
+    episode = []
+    traj = np.load(DATA_PATH+f"traj_0_{idx}.npz")
+    actions = traj["actions"][0]
+    images =traj["images"][0,:,1]
+    states = traj["states"][0]
+    # actions = np.load(DATA_PATH+f"actions_0_{idx}.npy")[0]
+    # images = np.load(DATA_PATH+f"images_0_{idx}.npz")["arr_0"][0,:,0]
+    # states = np.load(DATA_PATH+f"states_0_{idx}.npy")[0]
+    for step in range(len(actions)):
+        one_hot_action = np.zeros(14)
+        one_hot_action[actions[step]] = 1
+        episode.append({
+            'image': cv2.resize(images[step].transpose((1,2,0)), (256, 256)).astype(np.uint8),
+            'state': states[step],
+            'action': one_hot_action.astype(np.float32),
+            'language_instruction': TASK_DESCRIPTION,
+        })
+    np.save(path, episode)
+
+
+# create fake episodes for train and validation
+print("Generating train examples...")
+os.makedirs('data/train', exist_ok=True)
+for i in tqdm.tqdm(range(N_TRAIN_EPISODES)):
+    create_fake_episode(i, f'data/train/episode_{i}.npy')
+
+print("Generating val examples...")
+os.makedirs('data/val', exist_ok=True)
+for i in tqdm.tqdm(range(N_VAL_EPISODES)):
+    create_fake_episode(i, f'data/val/episode_{i}.npy')
+
+print('Successfully created example data!')
